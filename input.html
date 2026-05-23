@@ -1,554 +1,542 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gift Surprise</title>
-
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-body{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-family:Arial, sans-serif;
-    overflow:hidden;
-
-    background:
-    linear-gradient(
-        135deg,
-        #ff4e8a,
-        #8e44ad,
-        #2c3e50
-    );
-
-    position:relative;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gift Surprise</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+
+            background:
+                linear-gradient(135deg,
+                    #ff4e8a,
+                    #8e44ad,
+                    #2c3e50);
+
+            position: relative;
+        }
 
-/* Glow Background */
-body::before,
-body::after{
-    content:"";
-    position:absolute;
-    border-radius:50%;
-    filter:blur(100px);
-    z-index:0;
-}
+        /* Glow Background */
+        body::before,
+        body::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: 0;
+        }
 
-body::before{
-    width:300px;
-    height:300px;
-    background:rgba(255,215,0,.35);
-    top:10%;
-    left:10%;
-}
+        body::before {
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 215, 0, .35);
+            top: 10%;
+            left: 10%;
+        }
 
-body::after{
-    width:350px;
-    height:350px;
-    background:rgba(255,105,180,.35);
-    bottom:10%;
-    right:10%;
-}
+        body::after {
+            width: 350px;
+            height: 350px;
+            background: rgba(255, 105, 180, .35);
+            bottom: 10%;
+            right: 10%;
+        }
 
-/* Card */
-.card{
-    width:430px;
-    max-width:90%;
+        /* Card */
+        .card {
+            width: 430px;
+            max-width: 90%;
 
-    background:
-    rgba(255,255,255,.12);
+            background:
+                rgba(255, 255, 255, .12);
 
-    backdrop-filter:blur(14px);
+            backdrop-filter: blur(14px);
 
-    border-radius:24px;
+            border-radius: 24px;
 
-    padding:35px;
+            padding: 35px;
 
-    text-align:center;
+            text-align: center;
 
-    box-shadow:
-    0 0 40px rgba(255,255,255,.2);
+            box-shadow:
+                0 0 40px rgba(255, 255, 255, .2);
 
-    z-index:5;
-}
+            z-index: 5;
+        }
 
-.title{
-    font-size:34px;
-    color:#fff;
-    margin-bottom:10px;
-    font-weight:bold;
+        .title {
+            font-size: 34px;
+            color: #fff;
+            margin-bottom: 10px;
+            font-weight: bold;
 
-    text-shadow:
-    0 0 12px gold;
-}
+            text-shadow:
+                0 0 12px gold;
+        }
 
-.sub{
-    color:#fff;
-    margin-bottom:20px;
-    font-size:16px;
-}
+        .sub {
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
 
-.note{
-    color:#ffd700;
-    margin-top:10px;
-    font-size:14px;
-}
+        .note {
+            color: #ffd700;
+            margin-top: 10px;
+            font-size: 14px;
+        }
 
-input[type=file]{
-    width:100%;
-    color:#fff;
-    margin:20px 0;
-}
+        input[type=file] {
+            width: 100%;
+            color: #fff;
+            margin: 20px 0;
+        }
 
-/* Button */
-#giftBtn{
+        /* Button */
+        #giftBtn {
 
-    padding:14px 30px;
+            padding: 14px 30px;
 
-    border:none;
+            border: none;
 
-    border-radius:12px;
+            border-radius: 12px;
 
-    font-size:18px;
+            font-size: 18px;
 
-    font-weight:bold;
+            font-weight: bold;
 
-    cursor:pointer;
+            cursor: pointer;
 
-    background:#fff;
+            background: #fff;
 
-    color:#8e44ad;
+            color: #8e44ad;
 
-    opacity:.5;
+            opacity: .5;
 
-    pointer-events:none;
+            pointer-events: none;
 
-    transition:.3s;
-}
+            transition: .3s;
+        }
 
-#giftBtn.active{
+        #giftBtn.active {
 
-    opacity:1;
+            opacity: 1;
 
-    pointer-events:auto;
+            pointer-events: auto;
 
-    box-shadow:
-    0 0 20px gold,
-    0 0 40px hotpink;
+            box-shadow:
+                0 0 20px gold,
+                0 0 40px hotpink;
 
-    animation:
-    glow 1s infinite alternate;
-}
+            animation:
+                glow 1s infinite alternate;
+        }
 
-@keyframes glow{
+        @keyframes glow {
 
-    from{
-        transform:scale(1);
-    }
+            from {
+                transform: scale(1);
+            }
 
-    to{
-        transform:scale(1.06);
-    }
-}
+            to {
+                transform: scale(1.06);
+            }
+        }
 
-/* Gift Box */
-.gift-box{
+        /* Gift Box */
+        .gift-box {
 
-    display:none;
+            display: none;
 
-    position:absolute;
+            position: absolute;
 
-    width:180px;
-    height:180px;
+            width: 180px;
+            height: 180px;
 
-    background:#ff4e8a;
+            background: #ff4e8a;
 
-    border-radius:18px;
+            border-radius: 18px;
 
-    box-shadow:
-    0 0 25px rgba(255,255,255,.4);
+            box-shadow:
+                0 0 25px rgba(255, 255, 255, .4);
 
-    z-index:20;
+            z-index: 20;
 
-    animation:pop .8s ease;
-}
+            animation: pop .8s ease;
+        }
 
-.gift-box::before{
+        .gift-box::before {
 
-    content:"";
+            content: "";
 
-    position:absolute;
+            position: absolute;
 
-    width:100%;
-    height:25px;
+            width: 100%;
+            height: 25px;
 
-    background:#ffd700;
+            background: #ffd700;
 
-    top:45%;
-    left:0;
-}
+            top: 45%;
+            left: 0;
+        }
 
-.gift-box::after{
+        .gift-box::after {
 
-    content:"🎀";
+            content: "🎀";
 
-    position:absolute;
+            position: absolute;
 
-    font-size:60px;
+            font-size: 60px;
 
-    top:-35px;
-    left:50%;
+            top: -35px;
+            left: 50%;
 
-    transform:translateX(-50%);
-}
+            transform: translateX(-50%);
+        }
 
-.open{
-    animation:explode 1.5s forwards;
-}
+        .open {
+            animation: explode 1.5s forwards;
+        }
 
-@keyframes pop{
+        @keyframes pop {
 
-    from{
-        transform:scale(0);
-    }
+            from {
+                transform: scale(0);
+            }
 
-    to{
-        transform:scale(1);
-    }
-}
+            to {
+                transform: scale(1);
+            }
+        }
 
-@keyframes explode{
+        @keyframes explode {
 
-    0%{
-        transform:scale(1) rotate(0);
-    }
+            0% {
+                transform: scale(1) rotate(0);
+            }
 
-    50%{
-        transform:scale(1.2) rotate(10deg);
-    }
+            50% {
+                transform: scale(1.2) rotate(10deg);
+            }
 
-    100%{
-        transform:scale(4);
-        opacity:0;
-    }
-}
+            100% {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
 
-/* Hearts */
-.heart{
+        /* Hearts */
+        .heart {
 
-    position:absolute;
+            position: absolute;
 
-    color:#ff4e8a;
+            color: #ff4e8a;
 
-    font-size:25px;
+            font-size: 25px;
 
-    animation:
-    floatUp 4s linear forwards;
+            animation:
+                floatUp 4s linear forwards;
 
-    z-index:50;
-}
+            z-index: 50;
+        }
 
-@keyframes floatUp{
+        @keyframes floatUp {
 
-    from{
-        transform:translateY(0) scale(1);
-        opacity:1;
-    }
+            from {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
 
-    to{
-        transform:translateY(-600px) scale(2);
-        opacity:0;
-    }
-}
+            to {
+                transform: translateY(-600px) scale(2);
+                opacity: 0;
+            }
+        }
 
-/* Confetti */
-.confetti{
+        /* Confetti */
+        .confetti {
 
-    position:absolute;
+            position: absolute;
 
-    width:10px;
-    height:10px;
+            width: 10px;
+            height: 10px;
 
-    animation:
-    fall 3s linear forwards;
-}
+            animation:
+                fall 3s linear forwards;
+        }
 
-@keyframes fall{
+        @keyframes fall {
 
-    from{
-        transform:
-        translateY(-50px)
-        rotate(0deg);
+            from {
+                transform:
+                    translateY(-50px) rotate(0deg);
 
-        opacity:1;
-    }
+                opacity: 1;
+            }
 
-    to{
-        transform:
-        translateY(100vh)
-        rotate(720deg);
+            to {
+                transform:
+                    translateY(100vh) rotate(720deg);
 
-        opacity:0;
-    }
-}
-
-</style>
+                opacity: 0;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="card" id="uploadCard">
+    <div class="card" id="uploadCard">
 
-    <div class="title">
-        🎁 Your Gift
+        <div class="title">
+            🎁 Your Gift
+        </div>
+
+        <div class="sub">
+            Upload the Smiles, Love & Memories ✨
+        </div>
+
+        <input type="file" id="imageInput" accept="image/*" multiple>
+
+        <div class="note">
+            Minimum 5 Images | Maximum 8 Images
+        </div>
+
+        <br><br>
+
+        <button id="giftBtn">
+            Show Your Gift 🎂
+        </button>
+
     </div>
 
-    <div class="sub">
-        Upload the Smiles, Love & Memories ✨
-    </div>
+    <div class="gift-box" id="giftBox"></div>
 
-    <input
-        type="file"
-        id="imageInput"
-        accept="image/*"
-        multiple
-    >
+    <audio id="bgMusic" src="birthday.mp3"></audio>
 
-    <div class="note">
-        Minimum 5 Images | Maximum 8 Images
-    </div>
+    <script>
 
-    <br><br>
+        const input =
+            document.getElementById("imageInput");
 
-    <button id="giftBtn">
-        Show Your Gift 🎂
-    </button>
+        const btn =
+            document.getElementById("giftBtn");
 
-</div>
+        const giftBox =
+            document.getElementById("giftBox");
 
-<div class="gift-box" id="giftBox"></div>
+        const card =
+            document.getElementById("uploadCard");
 
-<audio id="bgMusic" src="birthday.mp3"></audio>
+        const music =
+            document.getElementById("bgMusic");
 
-<script>
+        let uploadedFiles = [];
 
-const input =
-    document.getElementById("imageInput");
+        /* =====================================
+           IMAGE SELECT
+        ===================================== */
 
-const btn =
-    document.getElementById("giftBtn");
+        input.addEventListener("change", function () {
 
-const giftBox =
-    document.getElementById("giftBox");
+            uploadedFiles = [...this.files];
 
-const card =
-    document.getElementById("uploadCard");
+            // MAX 8
+            if (uploadedFiles.length > 8) {
 
-const music =
-    document.getElementById("bgMusic");
+                alert("Maximum 8 images allowed!");
 
-let uploadedFiles = [];
+                this.value = "";
 
-/* =====================================
-   IMAGE SELECT
-===================================== */
+                uploadedFiles = [];
 
-input.addEventListener("change",function(){
+                btn.classList.remove("active");
 
-    uploadedFiles = [...this.files];
+                return;
+            }
 
-    // MAX 8
-    if(uploadedFiles.length > 8){
+            // MIN 5
+            if (uploadedFiles.length >= 5) {
 
-        alert("Maximum 8 images allowed!");
+                btn.classList.add("active");
 
-        this.value = "";
+            } else {
 
-        uploadedFiles = [];
+                btn.classList.remove("active");
+            }
+        });
 
-        btn.classList.remove("active");
+        /* =====================================
+           BUTTON CLICK
+        ===================================== */
 
-        return;
-    }
+        btn.addEventListener("click", async function () {
 
-    // MIN 5
-    if(uploadedFiles.length >= 5){
+            // MINIMUM CHECK
+            if (uploadedFiles.length < 5) {
 
-        btn.classList.add("active");
+                alert(
+                    "Please upload at least 5 images!"
+                );
 
-    }else{
+                return;
+            }
 
-        btn.classList.remove("active");
-    }
-});
+            // HIDE CARD
+            card.style.display = "none";
 
-/* =====================================
-   BUTTON CLICK
-===================================== */
+            // MUSIC
+            try {
 
-btn.addEventListener("click", async function(){
+                await music.play();
 
-    // MINIMUM CHECK
-    if(uploadedFiles.length < 5){
+            } catch (e) {
 
-        alert(
-            "Please upload at least 5 images!"
-        );
+                console.log(e);
+            }
 
-        return;
-    }
+            // SHOW GIFT BOX
+            giftBox.style.display = "block";
 
-    // HIDE CARD
-    card.style.display = "none";
+            // HEARTS
+            for (let i = 0; i < 20; i++) {
 
-    // MUSIC
-    try{
+                setTimeout(
+                    createHeart,
+                    i * 150
+                );
+            }
 
-        await music.play();
+            // CONFETTI
+            for (let i = 0; i < 40; i++) {
 
-    }catch(e){
+                setTimeout(
+                    createConfetti,
+                    i * 80
+                );
+            }
 
-        console.log(e);
-    }
+            // GIFT OPEN
+            setTimeout(() => {
 
-    // SHOW GIFT BOX
-    giftBox.style.display = "block";
+                giftBox.classList.add("open");
 
-    // HEARTS
-    for(let i=0;i<20;i++){
+            }, 1000);
 
-        setTimeout(
-            createHeart,
-            i * 150
-        );
-    }
+            /* =====================================
+               SAVE IMAGES
+            ===================================== */
 
-    // CONFETTI
-    for(let i=0;i<40;i++){
+            Promise.all(
 
-        setTimeout(
-            createConfetti,
-            i * 80
-        );
-    }
+                uploadedFiles.map(file => {
 
-    // GIFT OPEN
-    setTimeout(()=>{
+                    return new Promise((resolve) => {
 
-        giftBox.classList.add("open");
+                        const reader =
+                            new FileReader();
 
-    },1000);
+                        reader.onload =
+                            function (e) {
 
-    /* =====================================
-       SAVE IMAGES
-    ===================================== */
+                                resolve(URL.createObjectURL(file));
+                            };
 
-    Promise.all(
+                        reader.readAsDataURL(file);
 
-        uploadedFiles.map(file => {
+                    });
 
-            return new Promise((resolve)=>{
+                })
 
-                const reader =
-                    new FileReader();
+            ).then((images) => {
 
-                reader.onload =
-                function(e){
+                // SAVE IMAGES
+                sessionStorage.setItem(
+                    "birthdayImages",
+                    JSON.stringify(images)
+                );
+                // OPEN MAIN PAGE
+                setTimeout(() => {
 
-                    resolve(
-                        e.target.result
-                    );
-                };
+                    window.location.href =
+                        "main.html";
 
-                reader.readAsDataURL(file);
+                }, 1800);
 
             });
 
-        })
+        });
 
-    ).then((images)=>{
+        /* =====================================
+           HEARTS
+        ===================================== */
 
-        // SAVE IMAGES
-        localStorage.setItem(
-            "birthdayImages",
-            JSON.stringify(images)
-        );
+        function createHeart() {
 
-        // OPEN MAIN PAGE
-        setTimeout(()=>{
+            const heart =
+                document.createElement("div");
 
-            window.location.href =
-                "main.html";
+            heart.className = "heart";
 
-        },1800);
+            heart.innerHTML = "❤️";
 
-    });
+            heart.style.left =
+                Math.random() * 100 + "vw";
 
-});
+            heart.style.bottom = "0";
 
-/* =====================================
-   HEARTS
-===================================== */
+            document.body.appendChild(heart);
 
-function createHeart(){
+            setTimeout(() => {
 
-    const heart =
-        document.createElement("div");
+                heart.remove();
 
-    heart.className = "heart";
+            }, 4000);
+        }
 
-    heart.innerHTML = "❤️";
+        /* =====================================
+           CONFETTI
+        ===================================== */
 
-    heart.style.left =
-        Math.random() * 100 + "vw";
+        function createConfetti() {
 
-    heart.style.bottom = "0";
+            const confetti =
+                document.createElement("div");
 
-    document.body.appendChild(heart);
+            confetti.className = "confetti";
 
-    setTimeout(()=>{
+            confetti.style.left =
+                Math.random() * 100 + "vw";
 
-        heart.remove();
-
-    },4000);
-}
-
-/* =====================================
-   CONFETTI
-===================================== */
-
-function createConfetti(){
-
-    const confetti =
-        document.createElement("div");
-
-    confetti.className = "confetti";
-
-    confetti.style.left =
-        Math.random() * 100 + "vw";
-
-    confetti.style.background =
-        `hsl(${Math.random()*360},
+            confetti.style.background =
+                `hsl(${Math.random() * 360},
         100%,60%)`;
 
-    document.body.appendChild(confetti);
+            document.body.appendChild(confetti);
 
-    setTimeout(()=>{
+            setTimeout(() => {
 
-        confetti.remove();
+                confetti.remove();
 
-    },3000);
-}
+            }, 3000);
+        }
 
-</script>
+    </script>
 
 </body>
+
 </html>
