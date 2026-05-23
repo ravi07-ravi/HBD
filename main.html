@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Happy Birthday 💖</title>
+
+    <link rel="shortcut icon" href="icon.png" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            height: 100vh;
+            width: 100%;
+            font-family: 'Poppins', sans-serif;
+
+            background: linear-gradient(-45deg,
+                    #ff9a9e,
+                    #fad0c4,
+                    #fbc2eb,
+                    #a18cd1,
+                    #ffdde1);
+
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Canvas */
+        #canva {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        #canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 3D Gallery */
+        #drag-container,
+        #spin-container {
+            position: relative;
+            display: flex;
+            margin: auto;
+            transform-style: preserve-3d;
+            transform: rotateX(-10deg);
+        }
+
+        #drag-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #spin-container img {
+            position: absolute;
+            left: 0;
+            top: 0;
+
+            width: 180px;
+            height: 240px;
+
+            object-fit: cover;
+            border-radius: 20px;
+
+            box-shadow:
+                0 0 15px rgba(255, 255, 255, 0.8),
+                0 0 30px rgba(255, 105, 180, 0.7);
+
+            transition: 1s;
+        }
+
+        #spin-container img:hover {
+            transform: scale(1.08);
+
+            box-shadow:
+                0 0 20px white,
+                0 0 40px hotpink;
+        }
+
+        /* Birthday Text Circle */
+        /* TEXT */
+        /* TEXT */
+        /* TEXT ON PLATE */
+#spin-container p{
+
+    position:absolute;
+
+    top:100%;
+    left:50%;
+
+    transform:
+        translate(-50%,-50%)
+        rotateX(78deg)
+        translateZ(20px);
+
+    width:500px;
+    height:120px;
+
+    border-radius:50%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-family:'Dancing Script',cursive;
+
+    font-size:58px;
+
+    color:white;
+
+    text-align:center;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(255,105,180,0.35),
+            rgba(255,255,255,0.08),
+            transparent 75%
+        );
+
+    border:
+        2px solid rgba(255,255,255,0.15);
+
+    backdrop-filter:blur(10px);
+
+    box-shadow:
+        0 0 25px rgba(255,105,180,0.5),
+        0 0 60px rgba(255,255,255,0.15),
+        inset 0 0 20px rgba(255,255,255,0.1);
+
+    text-shadow:
+        0 0 10px #fff,
+        0 0 20px #ff4da6,
+        0 0 40px #ff66cc;
+
+    animation:plateGlow 2s infinite alternate;
+}
+
+@keyframes plateGlow{
+
+    from{
+
+        transform:
+            translate(-50%,-50%)
+            rotateX(78deg)
+            translateZ(20px)
+            scale(1);
+    }
+
+    to{
+
+        transform:
+            translate(-50%,-50%)
+            rotateX(78deg)
+            translateZ(20px)
+            scale(1.03);
+    }
+}
+
+        /* GLOWING PLATE */
+        #spin-container p::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: 50%;
+            top: 120%;
+
+            transform: translateX(-50%);
+
+            width: 420px;
+            height: 80px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(circle,
+                    rgba(255, 105, 180, 0.55),
+                    rgba(255, 255, 255, 0.12),
+                    transparent 75%);
+
+            filter: blur(10px);
+
+            z-index: -1;
+
+            box-shadow:
+                0 0 30px hotpink,
+                0 0 60px rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes glowText {
+
+            from {
+                transform:
+                    translate(-50%, -50%) translateZ(260px) scale(1);
+            }
+
+            to {
+                transform:
+                    translate(-50%, -50%) translateZ(260px) scale(1.05);
+            }
+        }
+
+        @keyframes glow {
+            from {
+                transform:
+                    translate(-50%, -50%) translateZ(260px) scale(1);
+            }
+
+            to {
+                transform:
+                    translate(-50%, -50%) translateZ(260px) scale(1.05);
+            }
+        }
+
+        /* Ground */
+        #ground {
+            width: 900px;
+            height: 900px;
+
+            position: absolute;
+            top: 100%;
+
+            transform:
+                translate(-50%, -50%) rotateX(90deg);
+
+            background:
+                radial-gradient(circle,
+                    rgba(255, 255, 255, 0.2),
+                    transparent);
+        }
+
+        /* No Images */
+        #noImages {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            color: white;
+            font-size: 30px;
+            text-align: center;
+
+            text-shadow: 0 0 15px hotpink;
+
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Canvas -->
+    <div id="canva">
+        <canvas id="canvas"></canvas>
+    </div>
+
+    <!-- 3D Gallery -->
+    <div id="drag-container">
+
+        <div id="spin-container">
+
+            <!-- Dynamic Birthday Name -->
+            <p id="birthdayText"></p>
+
+        </div>
+
+        <div id="ground"></div>
+    </div>
+
+    <!-- Music -->
+    <audio id="myAudio" autoplay loop playsinline>
+        <source src="setlove.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+
+        // ==========================================
+        // LOAD USER NAME
+        // ==========================================
+
+        const savedName =
+            localStorage.getItem("birthdayName") || "Someone";
+
+        document.getElementById("birthdayText").innerHTML =
+            `Happy Birthday ${savedName} 🎂💖`;
+
+        // ==========================================
+        // LOAD IMAGES FROM gift.html
+        // ==========================================
+
+        const ospin =
+            document.getElementById("spin-container");
+
+        const savedImages =
+            JSON.parse(
+                localStorage.getItem("birthdayImages")
+            ) || [];
+
+        if (savedImages.length === 0) {
+
+            const msg =
+                document.createElement("div");
+
+            msg.id = "noImages";
+
+            msg.innerHTML =
+                "No Images Found 💔 <br> Please Upload Images First";
+
+            document.body.appendChild(msg);
+
+        } else {
+
+            savedImages.forEach((src) => {
+
+                const img =
+                    document.createElement("img");
+
+                img.src = src;
+
+                ospin.insertBefore(
+                    img,
+                    ospin.firstChild
+                );
+            });
+        }
+
+        // ==========================================
+        // 3D ROTATION
+        // ==========================================
+
+        let radius = 350;
+        let autoRotate = true;
+        let rotateSpeed = -60;
+        let imgWidth = 180;
+        let imgHeight = 240;
+
+        const odrag =
+            document.getElementById('drag-container');
+
+        const aImg =
+            ospin.getElementsByTagName('img');
+
+        ospin.style.width =
+            imgWidth + "px";
+
+        ospin.style.height =
+            imgHeight + "px";
+
+        function init(delayTime) {
+
+            for (let i = 0; i < aImg.length; i++) {
+
+                aImg[i].style.transform =
+                    "rotateY(" +
+                    (i * (360 / aImg.length)) +
+                    "deg) translateZ(" +
+                    radius +
+                    "px)";
+
+                aImg[i].style.transition =
+                    "transform 1s";
+
+                aImg[i].style.transitionDelay =
+                    delayTime ||
+                    (aImg.length - i) / 4 + "s";
+            }
+        }
+
+        init();
+
+        if (autoRotate) {
+
+            let animationName =
+                rotateSpeed > 0
+                    ? 'spin'
+                    : 'spinRevert';
+
+            ospin.style.animation =
+                `${animationName}
+                ${Math.abs(rotateSpeed)}s
+                infinite linear`;
+        }
+
+        document.head.insertAdjacentHTML("beforeend", `
+
+        <style>
+
+        @keyframes spin{
+            from{
+                transform:rotateY(0deg);
+            }
+
+            to{
+                transform:rotateY(360deg);
+            }
+        }
+
+        @keyframes spinRevert{
+            from{
+                transform:rotateY(360deg);
+            }
+
+            to{
+                transform:rotateY(0deg);
+            }
+        }
+
+        </style>
+
+        `);
+        /* ==========================================
+   DRAG ROTATION
+========================================== */
+
+        let sX, sY, nX, nY;
+        let desX = 0, desY = 0;
+        let tX = 0, tY = 10;
+
+        document.onpointerdown = function (e) {
+
+            clearInterval(odrag.timer);
+
+            e = e || window.event;
+
+            sX = e.clientX;
+            sY = e.clientY;
+
+            this.onpointermove = function (e) {
+
+                e = e || window.event;
+
+                nX = e.clientX;
+                nY = e.clientY;
+
+                desX = nX - sX;
+                desY = nY - sY;
+
+                tX += desX * 0.1;
+                tY += desY * 0.1;
+
+                applyTransform(odrag);
+
+                sX = nX;
+                sY = nY;
+            };
+
+            this.onpointerup = function () {
+
+                odrag.timer = setInterval(function () {
+
+                    desX *= 0.95;
+                    desY *= 0.95;
+
+                    tX += desX * 0.1;
+                    tY += desY * 0.1;
+
+                    applyTransform(odrag);
+
+                    if (
+                        Math.abs(desX) < 0.5 &&
+                        Math.abs(desY) < 0.5
+                    ) {
+
+                        clearInterval(odrag.timer);
+                    }
+
+                }, 17);
+
+                this.onpointermove = null;
+                this.onpointerup = null;
+            };
+
+            return false;
+        };
+
+        function applyTransform(obj) {
+
+            if (tY > 180) tY = 180;
+            if (tY < -180) tY = -180;
+
+            obj.style.transform =
+                `rotateX(${-tY}deg)
+         rotateY(${tX}deg)`;
+        }
+
+        // ==========================================
+        // MUSIC
+        // ==========================================
+
+        window.onload = function () {
+
+            const audio =
+                document.getElementById("myAudio");
+
+            audio.play().catch((e) => {
+                console.log(e);
+            });
+
+            startFireworks();
+        };
+
+        // ==========================================
+        // FIREWORKS
+        // ==========================================
+
+        const canvas =
+            document.getElementById("canvas");
+
+        const ctx =
+            canvas.getContext("2d");
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        function random(min, max) {
+
+            return Math.random() *
+                (max - min) + min;
+        }
+
+        class Firework {
+
+            constructor(x, y) {
+
+                this.x = x;
+                this.y = y;
+
+                this.radius =
+                    random(2, 4);
+
+                this.color =
+                    `hsl(${random(0, 360)},
+                    100%,50%)`;
+
+                this.vx =
+                    random(-3, 3);
+
+                this.vy =
+                    random(-3, 3);
+
+                this.life = 100;
+            }
+
+            draw() {
+
+                ctx.beginPath();
+
+                ctx.arc(
+                    this.x,
+                    this.y,
+                    this.radius,
+                    0,
+                    Math.PI * 2
+                );
+
+                ctx.fillStyle =
+                    this.color;
+
+                ctx.fill();
+            }
+
+            update() {
+
+                this.x += this.vx;
+                this.y += this.vy;
+
+                this.life--;
+            }
+        }
+
+        let fireworks = [];
+
+        function startFireworks() {
+
+            function animate() {
+
+                ctx.clearRect(
+                    0,
+                    0,
+                    canvas.width,
+                    canvas.height
+                );
+
+                if (Math.random() < 0.15) {
+
+                    fireworks.push(
+
+                        new Firework(
+
+                            random(
+                                0,
+                                canvas.width
+                            ),
+
+                            random(
+                                0,
+                                canvas.height / 2
+                            )
+                        )
+                    );
+                }
+
+                fireworks.forEach(
+                    (firework, index) => {
+
+                        firework.draw();
+
+                        firework.update();
+
+                        if (firework.life <= 0) {
+
+                            fireworks.splice(index, 1);
+                        }
+                    });
+
+                requestAnimationFrame(
+                    animate
+                );
+            }
+
+            animate();
+        }
+
+        // ==========================================
+        // RESPONSIVE
+        // ==========================================
+
+        window.addEventListener(
+            "resize",
+            () => {
+
+                canvas.width =
+                    window.innerWidth;
+
+                canvas.height =
+                    window.innerHeight;
+            });
+
+    </script>
+
+</body>
+
+</html>
