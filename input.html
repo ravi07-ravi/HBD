@@ -298,6 +298,91 @@
     </style>
 </head>
 
+<script type="module">
+
+    import { createClient }
+        from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+    const supabaseUrl =
+        'https://isddqsccsewcowfcfcnd.supabase.co'
+
+    const supabaseKey =
+        'sb_publishable_mAdYRN6Vtk_MyALWU90xgw_x-FxApxz'
+
+    const supabase =
+        createClient(
+            supabaseUrl,
+            supabaseKey
+        );
+
+    const input =
+        document.getElementById("imageInput");
+
+    const btn =
+        document.getElementById("giftBtn");
+
+    let uploadedFiles = [];
+
+    input.addEventListener(
+        "change",
+        function () {
+
+            uploadedFiles =
+                [...this.files];
+        });
+
+    btn.addEventListener(
+        "click",
+        async function () {
+
+            if (uploadedFiles.length === 0) {
+
+                alert("Upload images first");
+                return;
+            }
+
+            let imageUrls = [];
+
+            for (const file of uploadedFiles) {
+
+                const fileName =
+                    Date.now() + "-" + file.name;
+
+                const { data, error } =
+                    await supabase.storage
+                        .from("images")
+                        .upload(
+                            fileName,
+                            file
+                        );
+
+                if (error) {
+
+                    console.log(error);
+                    continue;
+                }
+
+                const { data: urlData } =
+                    supabase.storage
+                        .from("images")
+                        .getPublicUrl(fileName);
+
+                imageUrls.push(
+                    urlData.publicUrl
+                );
+            }
+
+            localStorage.setItem(
+                "birthdayImages",
+                JSON.stringify(imageUrls)
+            );
+
+            window.location.href =
+                "main.html";
+        });
+
+</script>
+
 <body>
 
     <div class="card" id="uploadCard">
