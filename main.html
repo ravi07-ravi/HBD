@@ -332,7 +332,7 @@
 
         const savedImages =
             JSON.parse(
-                sessionStorage.getItem("birthdayImages")
+                localStorage.getItem("birthdayImages")
             ) || [];
 
         if (savedImages.length === 0) {
