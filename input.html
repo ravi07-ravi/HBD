@@ -7,237 +7,233 @@
     <title>Gift Surprise</title>
 
     <style>
-
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        body{
-            min-height:100vh;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            font-family:Arial,sans-serif;
-            overflow:hidden;
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
 
             background:
-            linear-gradient(
-                135deg,
-                #ff4e8a,
-                #8e44ad,
-                #2c3e50
-            );
+                linear-gradient(135deg,
+                    #ff4e8a,
+                    #8e44ad,
+                    #2c3e50);
 
-            position:relative;
+            position: relative;
         }
 
         body::before,
-        body::after{
-            content:"";
-            position:absolute;
-            border-radius:50%;
-            filter:blur(100px);
-            z-index:0;
+        body::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: 0;
         }
 
-        body::before{
-            width:300px;
-            height:300px;
-            background:rgba(255,215,0,.35);
-            top:10%;
-            left:10%;
+        body::before {
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 215, 0, .35);
+            top: 10%;
+            left: 10%;
         }
 
-        body::after{
-            width:350px;
-            height:350px;
-            background:rgba(255,105,180,.35);
-            bottom:10%;
-            right:10%;
+        body::after {
+            width: 350px;
+            height: 350px;
+            background: rgba(255, 105, 180, .35);
+            bottom: 10%;
+            right: 10%;
         }
 
-        .card{
-            width:430px;
-            max-width:90%;
+        .card {
+            width: 430px;
+            max-width: 90%;
 
             background:
-            rgba(255,255,255,.12);
+                rgba(255, 255, 255, .12);
 
-            backdrop-filter:blur(14px);
+            backdrop-filter: blur(14px);
 
-            border-radius:24px;
+            border-radius: 24px;
 
-            padding:35px;
+            padding: 35px;
 
-            text-align:center;
+            text-align: center;
 
             box-shadow:
-            0 0 40px rgba(255,255,255,.2);
+                0 0 40px rgba(255, 255, 255, .2);
 
-            z-index:5;
+            z-index: 5;
         }
 
-        .title{
-            font-size:34px;
-            color:#fff;
-            margin-bottom:10px;
-            font-weight:bold;
+        .title {
+            font-size: 34px;
+            color: #fff;
+            margin-bottom: 10px;
+            font-weight: bold;
 
             text-shadow:
-            0 0 12px gold;
+                0 0 12px gold;
         }
 
-        .sub{
-            color:#fff;
-            margin-bottom:20px;
-            font-size:16px;
+        .sub {
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 16px;
         }
 
-        .note{
-            color:#ffd700;
-            margin-top:10px;
-            font-size:14px;
+        .note {
+            color: #ffd700;
+            margin-top: 10px;
+            font-size: 14px;
         }
 
-        input[type=file]{
-            width:100%;
-            color:#fff;
-            margin:20px 0;
+        input[type=file] {
+            width: 100%;
+            color: #fff;
+            margin: 20px 0;
         }
 
-        #giftBtn{
+        #giftBtn {
 
-            padding:14px 30px;
+            padding: 14px 30px;
 
-            border:none;
+            border: none;
 
-            border-radius:12px;
+            border-radius: 12px;
 
-            font-size:18px;
+            font-size: 18px;
 
-            font-weight:bold;
+            font-weight: bold;
 
-            cursor:pointer;
+            cursor: pointer;
 
-            background:#fff;
+            background: #fff;
 
-            color:#8e44ad;
+            color: #8e44ad;
 
-            opacity:.5;
+            opacity: .5;
 
-            pointer-events:none;
+            pointer-events: none;
 
-            transition:.3s;
+            transition: .3s;
         }
 
-        #giftBtn.active{
+        #giftBtn.active {
 
-            opacity:1;
+            opacity: 1;
 
-            pointer-events:auto;
+            pointer-events: auto;
 
             box-shadow:
-            0 0 20px gold,
-            0 0 40px hotpink;
+                0 0 20px gold,
+                0 0 40px hotpink;
 
             animation:
-            glow 1s infinite alternate;
+                glow 1s infinite alternate;
         }
 
-        @keyframes glow{
+        @keyframes glow {
 
-            from{
-                transform:scale(1);
+            from {
+                transform: scale(1);
             }
 
-            to{
-                transform:scale(1.06);
+            to {
+                transform: scale(1.06);
             }
         }
 
-        .gift-box{
+        .gift-box {
 
-            display:none;
+            display: none;
 
-            position:absolute;
+            position: absolute;
 
-            width:180px;
-            height:180px;
+            width: 180px;
+            height: 180px;
 
-            background:#ff4e8a;
+            background: #ff4e8a;
 
-            border-radius:18px;
+            border-radius: 18px;
 
             box-shadow:
-            0 0 25px rgba(255,255,255,.4);
+                0 0 25px rgba(255, 255, 255, .4);
 
-            z-index:20;
+            z-index: 20;
 
-            animation:pop .8s ease;
+            animation: pop .8s ease;
         }
 
-        .gift-box::before{
+        .gift-box::before {
 
-            content:"";
+            content: "";
 
-            position:absolute;
+            position: absolute;
 
-            width:100%;
-            height:25px;
+            width: 100%;
+            height: 25px;
 
-            background:#ffd700;
+            background: #ffd700;
 
-            top:45%;
-            left:0;
+            top: 45%;
+            left: 0;
         }
 
-        .gift-box::after{
+        .gift-box::after {
 
-            content:"🎀";
+            content: "🎀";
 
-            position:absolute;
+            position: absolute;
 
-            font-size:60px;
+            font-size: 60px;
 
-            top:-35px;
-            left:50%;
+            top: -35px;
+            left: 50%;
 
-            transform:translateX(-50%);
+            transform: translateX(-50%);
         }
 
-        .open{
-            animation:explode 1.5s forwards;
+        .open {
+            animation: explode 1.5s forwards;
         }
 
-        @keyframes pop{
+        @keyframes pop {
 
-            from{
-                transform:scale(0);
+            from {
+                transform: scale(0);
             }
 
-            to{
-                transform:scale(1);
-            }
-        }
-
-        @keyframes explode{
-
-            0%{
-                transform:scale(1) rotate(0);
-            }
-
-            50%{
-                transform:scale(1.2) rotate(10deg);
-            }
-
-            100%{
-                transform:scale(4);
-                opacity:0;
+            to {
+                transform: scale(1);
             }
         }
 
+        @keyframes explode {
+
+            0% {
+                transform: scale(1) rotate(0);
+            }
+
+            50% {
+                transform: scale(1.2) rotate(10deg);
+            }
+
+            100% {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 
@@ -253,12 +249,7 @@
             Upload Your Beautiful Memories ✨
         </div>
 
-        <input
-            type="file"
-            id="imageInput"
-            accept="image/*"
-            multiple
-        >
+        <input type="file" id="imageInput" accept="image/*" multiple>
 
         <div class="note">
             Upload Unlimited Images 💖
@@ -276,130 +267,133 @@
 
     <audio id="bgMusic" src="birthday.mp3"></audio>
 
-<script type="module">
+    <script type="module">
 
-import { createClient }
-from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+        import { createClient }
+            from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
-const supabaseUrl =
-'https://isddqsccsewcowfcfcnd.supabase.co'
+        const supabaseUrl =
+            'https://isddqsccsewcowfcfcnd.supabase.co'
 
-const supabaseKey =
-'sb_publishable_mAdYRN6Vtk_MyALWU90xgw_x-FxApxz'
+        const supabaseKey =
+            'sb_publishable_mAdYRN6Vtk_MyALWU90xgw_x-FxApxz'
 
-const supabase =
-createClient(
-    supabaseUrl,
-    supabaseKey
-);
+        const supabase =
+            createClient(
+                supabaseUrl,
+                supabaseKey
+            );
 
-const input =
-document.getElementById("imageInput");
+        const input =
+            document.getElementById("imageInput");
 
-const btn =
-document.getElementById("giftBtn");
+        const btn =
+            document.getElementById("giftBtn");
 
-const giftBox =
-document.getElementById("giftBox");
+        const giftBox =
+            document.getElementById("giftBox");
 
-const card =
-document.getElementById("uploadCard");
+        const card =
+            document.getElementById("uploadCard");
 
-const music =
-document.getElementById("bgMusic");
+        const music =
+            document.getElementById("bgMusic");
 
-let uploadedFiles = [];
+        let uploadedFiles = [];
 
-/* IMAGE SELECT */
+        /* IMAGE SELECT */
 
-input.addEventListener(
-"change",
-function(){
+        input.addEventListener(
+            "change",
+            function () {
 
-    uploadedFiles =
-    [...this.files];
+                uploadedFiles =
+                    [...this.files];
 
-    if(uploadedFiles.length >= 1){
+                if (uploadedFiles.length >= 1) {
 
-        btn.classList.add("active");
+                    btn.classList.add("active");
 
-    }else{
+                } else {
 
-        btn.classList.remove("active");
-    }
-});
+                    btn.classList.remove("active");
+                }
+            });
 
-/* BUTTON CLICK */
+        /* BUTTON CLICK */
 
-btn.addEventListener(
-"click",
-async function(){
+        btn.addEventListener(
+            "click",
+            async function () {
 
-    if(uploadedFiles.length === 0){
+                if (uploadedFiles.length === 0) {
 
-        alert("Upload images first");
-        return;
-    }
+                    alert("Upload images first");
+                    return;
+                }
 
-    card.style.display = "none";
+                card.style.display = "none";
 
-    try{
-        await music.play();
-    }catch(e){}
+                try {
+                    await music.play();
+                } catch (e) { }
 
-    giftBox.style.display = "block";
+                giftBox.style.display = "block";
 
-    setTimeout(()=>{
+                setTimeout(() => {
 
-        giftBox.classList.add("open");
+                    giftBox.classList.add("open");
 
-    },1000);
+                }, 1000);
 
-    let imageUrls = [];
+                let imageUrls = [];
 
-    for(const file of uploadedFiles){
+                for (const file of uploadedFiles) {
 
-        const fileName =
-        Date.now() + "-" + file.name;
+                    const fileName =
+                        Date.now() + "-" + file.name;
 
-        const { error } =
-        await supabase.storage
-        .from("image")
-        .upload(
-            fileName,
-            file
-        );
+                    const { error } =
+                        await supabase.storage
+                            .from("image")
+                            .upload(
+                                fileName,
+                                file,
+                                {
+                                    upsert: true
+                                }
+                            );
 
-        if(error){
+                    if (error) {
 
-            alert(error.message);
+                        alert(error.message);
 
-            console.log(error);
+                        console.log(error);
 
-            return;
-        }
+                        return;
+                    }
 
-        const { data } =
-        supabase.storage
-        .from("image")
-        .getPublicUrl(fileName);
+                    const { data } =
+                        supabase.storage
+                            .from("image")
+                            .getPublicUrl(fileName);
 
-        imageUrls.push(
-            data.publicUrl
-        );
-    }
+                    imageUrls.push(
+                        data.publicUrl
+                    );
+                }
 
-    localStorage.setItem(
-        "birthdayImages",
-        JSON.stringify(imageUrls)
-    );
+                localStorage.setItem(
+                    "birthdayImages",
+                    JSON.stringify(imageUrls)
+                );
 
-    setTimeout(()=>{
+                setTimeout(() => {
 
-        window.location.href =
-        "main.html";
+                    window.location.href =
+                        "main.html";
 
-    },2000);
-});
+                }, 2000);
+            });
 
-</script>
+    </script>
