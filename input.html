@@ -355,7 +355,7 @@
 
                     const { error } =
                         await supabase.storage
-                            .from("IMAGE")
+                            .from("image")
                             .upload(
                                 fileName,
                                 file,
@@ -375,7 +375,7 @@
 
                     const { data } =
                         supabase.storage
-                            .from("IMAGE")
+                            .from("image")
                             .getPublicUrl(fileName);
 
                     imageUrls.push(
