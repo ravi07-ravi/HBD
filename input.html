@@ -7,381 +7,239 @@
     <title>Gift Surprise</title>
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
         }
 
-        body {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: Arial, sans-serif;
-            overflow: hidden;
+        body{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            font-family:Arial,sans-serif;
+            overflow:hidden;
 
             background:
-                linear-gradient(135deg,
-                    #ff4e8a,
-                    #8e44ad,
-                    #2c3e50);
-
-            position: relative;
-        }
-
-        /* Glow Background */
-        body::before,
-        body::after {
-            content: "";
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(100px);
-            z-index: 0;
-        }
-
-        body::before {
-            width: 300px;
-            height: 300px;
-            background: rgba(255, 215, 0, .35);
-            top: 10%;
-            left: 10%;
-        }
-
-        body::after {
-            width: 350px;
-            height: 350px;
-            background: rgba(255, 105, 180, .35);
-            bottom: 10%;
-            right: 10%;
-        }
-
-        /* Card */
-        .card {
-            width: 430px;
-            max-width: 90%;
-
-            background:
-                rgba(255, 255, 255, .12);
-
-            backdrop-filter: blur(14px);
-
-            border-radius: 24px;
-
-            padding: 35px;
-
-            text-align: center;
-
-            box-shadow:
-                0 0 40px rgba(255, 255, 255, .2);
-
-            z-index: 5;
-        }
-
-        .title {
-            font-size: 34px;
-            color: #fff;
-            margin-bottom: 10px;
-            font-weight: bold;
-
-            text-shadow:
-                0 0 12px gold;
-        }
-
-        .sub {
-            color: #fff;
-            margin-bottom: 20px;
-            font-size: 16px;
-        }
-
-        .note {
-            color: #ffd700;
-            margin-top: 10px;
-            font-size: 14px;
-        }
-
-        input[type=file] {
-            width: 100%;
-            color: #fff;
-            margin: 20px 0;
-        }
-
-        /* Button */
-        #giftBtn {
-
-            padding: 14px 30px;
-
-            border: none;
-
-            border-radius: 12px;
-
-            font-size: 18px;
-
-            font-weight: bold;
-
-            cursor: pointer;
-
-            background: #fff;
-
-            color: #8e44ad;
-
-            opacity: .5;
-
-            pointer-events: none;
-
-            transition: .3s;
-        }
-
-        #giftBtn.active {
-
-            opacity: 1;
-
-            pointer-events: auto;
-
-            box-shadow:
-                0 0 20px gold,
-                0 0 40px hotpink;
-
-            animation:
-                glow 1s infinite alternate;
-        }
-
-        @keyframes glow {
-
-            from {
-                transform: scale(1);
-            }
-
-            to {
-                transform: scale(1.06);
-            }
-        }
-
-        /* Gift Box */
-        .gift-box {
-
-            display: none;
-
-            position: absolute;
-
-            width: 180px;
-            height: 180px;
-
-            background: #ff4e8a;
-
-            border-radius: 18px;
-
-            box-shadow:
-                0 0 25px rgba(255, 255, 255, .4);
-
-            z-index: 20;
-
-            animation: pop .8s ease;
-        }
-
-        .gift-box::before {
-
-            content: "";
-
-            position: absolute;
-
-            width: 100%;
-            height: 25px;
-
-            background: #ffd700;
-
-            top: 45%;
-            left: 0;
-        }
-
-        .gift-box::after {
-
-            content: "🎀";
-
-            position: absolute;
-
-            font-size: 60px;
-
-            top: -35px;
-            left: 50%;
-
-            transform: translateX(-50%);
-        }
-
-        .open {
-            animation: explode 1.5s forwards;
-        }
-
-        @keyframes pop {
-
-            from {
-                transform: scale(0);
-            }
-
-            to {
-                transform: scale(1);
-            }
-        }
-
-        @keyframes explode {
-
-            0% {
-                transform: scale(1) rotate(0);
-            }
-
-            50% {
-                transform: scale(1.2) rotate(10deg);
-            }
-
-            100% {
-                transform: scale(4);
-                opacity: 0;
-            }
-        }
-
-        /* Hearts */
-        .heart {
-
-            position: absolute;
-
-            color: #ff4e8a;
-
-            font-size: 25px;
-
-            animation:
-                floatUp 4s linear forwards;
-
-            z-index: 50;
-        }
-
-        @keyframes floatUp {
-
-            from {
-                transform: translateY(0) scale(1);
-                opacity: 1;
-            }
-
-            to {
-                transform: translateY(-600px) scale(2);
-                opacity: 0;
-            }
-        }
-
-        /* Confetti */
-        .confetti {
-
-            position: absolute;
-
-            width: 10px;
-            height: 10px;
-
-            animation:
-                fall 3s linear forwards;
-        }
-
-        @keyframes fall {
-
-            from {
-                transform:
-                    translateY(-50px) rotate(0deg);
-
-                opacity: 1;
-            }
-
-            to {
-                transform:
-                    translateY(100vh) rotate(720deg);
-
-                opacity: 0;
-            }
-        }
-    </style>
-</head>
-
-<script type="module">
-
-    import { createClient }
-        from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
-
-    const supabaseUrl =
-        'https://isddqsccsewcowfcfcnd.supabase.co'
-
-    const supabaseKey =
-        'sb_publishable_mAdYRN6Vtk_MyALWU90xgw_x-FxApxz'
-
-    const supabase =
-        createClient(
-            supabaseUrl,
-            supabaseKey
-        );
-
-    const input =
-        document.getElementById("imageInput");
-
-    const btn =
-        document.getElementById("giftBtn");
-
-    let uploadedFiles = [];
-
-    input.addEventListener(
-        "change",
-        function () {
-
-            uploadedFiles =
-                [...this.files];
-        });
-
-    btn.addEventListener(
-        "click",
-        async function () {
-
-            if (uploadedFiles.length === 0) {
-
-                alert("Upload images first");
-                return;
-            }
-
-            let imageUrls = [];
-
-            for (const file of uploadedFiles) {
-
-                const fileName =
-                    Date.now() + "-" + file.name;
-
-                const { data, error } =
-                    await supabase.storage
-                        .from("images")
-                        .upload(
-                            fileName,
-                            file
-                        );
-
-                if (error) {
-
-                    console.log(error);
-                    continue;
-                }
-
-                const { data: urlData } =
-                    supabase.storage
-                        .from("images")
-                        .getPublicUrl(fileName);
-
-                imageUrls.push(
-                    urlData.publicUrl
-                );
-            }
-
-            localStorage.setItem(
-                "birthdayImages",
-                JSON.stringify(imageUrls)
+            linear-gradient(
+                135deg,
+                #ff4e8a,
+                #8e44ad,
+                #2c3e50
             );
 
-            window.location.href =
-                "main.html";
-        });
+            position:relative;
+        }
 
-</script>
+        body::before,
+        body::after{
+            content:"";
+            position:absolute;
+            border-radius:50%;
+            filter:blur(100px);
+            z-index:0;
+        }
+
+        body::before{
+            width:300px;
+            height:300px;
+            background:rgba(255,215,0,.35);
+            top:10%;
+            left:10%;
+        }
+
+        body::after{
+            width:350px;
+            height:350px;
+            background:rgba(255,105,180,.35);
+            bottom:10%;
+            right:10%;
+        }
+
+        .card{
+            width:430px;
+            max-width:90%;
+
+            background:
+            rgba(255,255,255,.12);
+
+            backdrop-filter:blur(14px);
+
+            border-radius:24px;
+
+            padding:35px;
+
+            text-align:center;
+
+            box-shadow:
+            0 0 40px rgba(255,255,255,.2);
+
+            z-index:5;
+        }
+
+        .title{
+            font-size:34px;
+            color:#fff;
+            margin-bottom:10px;
+            font-weight:bold;
+
+            text-shadow:
+            0 0 12px gold;
+        }
+
+        .sub{
+            color:#fff;
+            margin-bottom:20px;
+            font-size:16px;
+        }
+
+        .note{
+            color:#ffd700;
+            margin-top:10px;
+            font-size:14px;
+        }
+
+        input[type=file]{
+            width:100%;
+            color:#fff;
+            margin:20px 0;
+        }
+
+        #giftBtn{
+
+            padding:14px 30px;
+
+            border:none;
+
+            border-radius:12px;
+
+            font-size:18px;
+
+            font-weight:bold;
+
+            cursor:pointer;
+
+            background:#fff;
+
+            color:#8e44ad;
+
+            opacity:.5;
+
+            pointer-events:none;
+
+            transition:.3s;
+        }
+
+        #giftBtn.active{
+
+            opacity:1;
+
+            pointer-events:auto;
+
+            box-shadow:
+            0 0 20px gold,
+            0 0 40px hotpink;
+
+            animation:
+            glow 1s infinite alternate;
+        }
+
+        @keyframes glow{
+
+            from{
+                transform:scale(1);
+            }
+
+            to{
+                transform:scale(1.06);
+            }
+        }
+
+        .gift-box{
+
+            display:none;
+
+            position:absolute;
+
+            width:180px;
+            height:180px;
+
+            background:#ff4e8a;
+
+            border-radius:18px;
+
+            box-shadow:
+            0 0 25px rgba(255,255,255,.4);
+
+            z-index:20;
+
+            animation:pop .8s ease;
+        }
+
+        .gift-box::before{
+
+            content:"";
+
+            position:absolute;
+
+            width:100%;
+            height:25px;
+
+            background:#ffd700;
+
+            top:45%;
+            left:0;
+        }
+
+        .gift-box::after{
+
+            content:"🎀";
+
+            position:absolute;
+
+            font-size:60px;
+
+            top:-35px;
+            left:50%;
+
+            transform:translateX(-50%);
+        }
+
+        .open{
+            animation:explode 1.5s forwards;
+        }
+
+        @keyframes pop{
+
+            from{
+                transform:scale(0);
+            }
+
+            to{
+                transform:scale(1);
+            }
+        }
+
+        @keyframes explode{
+
+            0%{
+                transform:scale(1) rotate(0);
+            }
+
+            50%{
+                transform:scale(1.2) rotate(10deg);
+            }
+
+            100%{
+                transform:scale(4);
+                opacity:0;
+            }
+        }
+
+    </style>
+</head>
 
 <body>
 
@@ -392,13 +250,18 @@
         </div>
 
         <div class="sub">
-            Upload the Smiles, Love & Memories ✨
+            Upload Your Beautiful Memories ✨
         </div>
 
-        <input type="file" id="imageInput" accept="image/*" multiple>
+        <input
+            type="file"
+            id="imageInput"
+            accept="image/*"
+            multiple
+        >
 
         <div class="note">
-            Minimum 5 Images | Maximum 8 Images
+            Upload Unlimited Images 💖
         </div>
 
         <br><br>
@@ -413,215 +276,130 @@
 
     <audio id="bgMusic" src="birthday.mp3"></audio>
 
-    <script>
+<script type="module">
 
-        const input =
-            document.getElementById("imageInput");
+import { createClient }
+from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
-        const btn =
-            document.getElementById("giftBtn");
+const supabaseUrl =
+'https://isddqsccsewcowfcfcnd.supabase.co'
 
-        const giftBox =
-            document.getElementById("giftBox");
+const supabaseKey =
+'sb_publishable_mAdYRN6Vtk_MyALWU90xgw_x-FxApxz'
 
-        const card =
-            document.getElementById("uploadCard");
+const supabase =
+createClient(
+    supabaseUrl,
+    supabaseKey
+);
 
-        const music =
-            document.getElementById("bgMusic");
+const input =
+document.getElementById("imageInput");
 
-        let uploadedFiles = [];
+const btn =
+document.getElementById("giftBtn");
 
-        /* =====================================
-           IMAGE SELECT
-        ===================================== */
+const giftBox =
+document.getElementById("giftBox");
 
-        input.addEventListener("change", function () {
+const card =
+document.getElementById("uploadCard");
 
-            uploadedFiles = [...this.files];
+const music =
+document.getElementById("bgMusic");
 
-            // MAX 8
-            if (uploadedFiles.length > 8) {
+let uploadedFiles = [];
 
-                alert("Maximum 8 images allowed!");
+/* IMAGE SELECT */
 
-                this.value = "";
+input.addEventListener(
+"change",
+function(){
 
-                uploadedFiles = [];
+    uploadedFiles =
+    [...this.files];
 
-                btn.classList.remove("active");
+    if(uploadedFiles.length >= 1){
 
-                return;
-            }
+        btn.classList.add("active");
 
-            // MIN 5
-            if (uploadedFiles.length >= 5) {
+    }else{
 
-                btn.classList.add("active");
+        btn.classList.remove("active");
+    }
+});
 
-            } else {
+/* BUTTON CLICK */
 
-                btn.classList.remove("active");
-            }
-        });
+btn.addEventListener(
+"click",
+async function(){
 
-        /* =====================================
-           BUTTON CLICK
-        ===================================== */
+    if(uploadedFiles.length === 0){
 
-        btn.addEventListener("click", async function () {
+        alert("Upload images first");
+        return;
+    }
 
-            // MINIMUM CHECK
-            if (uploadedFiles.length < 5) {
+    card.style.display = "none";
 
-                alert(
-                    "Please upload at least 5 images!"
-                );
+    try{
+        await music.play();
+    }catch(e){}
 
-                return;
-            }
+    giftBox.style.display = "block";
 
-            // HIDE CARD
-            card.style.display = "none";
+    setTimeout(()=>{
 
-            // MUSIC
-            try {
+        giftBox.classList.add("open");
 
-                await music.play();
+    },1000);
 
-            } catch (e) {
+    let imageUrls = [];
 
-                console.log(e);
-            }
+    for(const file of uploadedFiles){
 
-            // SHOW GIFT BOX
-            giftBox.style.display = "block";
+        const fileName =
+        Date.now() + "-" + file.name;
 
-            // HEARTS
-            for (let i = 0; i < 20; i++) {
+        const { error } =
+        await supabase.storage
+        .from("images")
+        .upload(
+            fileName,
+            file
+        );
 
-                setTimeout(
-                    createHeart,
-                    i * 150
-                );
-            }
+        if(error){
 
-            // CONFETTI
-            for (let i = 0; i < 40; i++) {
-
-                setTimeout(
-                    createConfetti,
-                    i * 80
-                );
-            }
-
-            // GIFT OPEN
-            setTimeout(() => {
-
-                giftBox.classList.add("open");
-
-            }, 1000);
-
-            /* =====================================
-               SAVE IMAGES
-            ===================================== */
-
-            Promise.all(
-
-                uploadedFiles.map(file => {
-
-                    return new Promise((resolve) => {
-
-                        const reader =
-                            new FileReader();
-
-                        reader.onload =
-                            function (e) {
-
-                                resolve(URL.createObjectURL(file));
-                            };
-
-                        reader.readAsDataURL(file);
-
-                    });
-
-                })
-
-            ).then((images) => {
-
-                // SAVE IMAGES
-                sessionStorage.setItem(
-                    "birthdayImages",
-                    JSON.stringify(images)
-                );
-                // OPEN MAIN PAGE
-                setTimeout(() => {
-
-                    window.location.href =
-                        "main.html";
-
-                }, 1800);
-
-            });
-
-        });
-
-        /* =====================================
-           HEARTS
-        ===================================== */
-
-        function createHeart() {
-
-            const heart =
-                document.createElement("div");
-
-            heart.className = "heart";
-
-            heart.innerHTML = "❤️";
-
-            heart.style.left =
-                Math.random() * 100 + "vw";
-
-            heart.style.bottom = "0";
-
-            document.body.appendChild(heart);
-
-            setTimeout(() => {
-
-                heart.remove();
-
-            }, 4000);
+            console.log(error);
+            continue;
         }
 
-        /* =====================================
-           CONFETTI
-        ===================================== */
+        const { data } =
+        supabase.storage
+        .from("images")
+        .getPublicUrl(fileName);
 
-        function createConfetti() {
+        imageUrls.push(
+            data.publicUrl
+        );
+    }
 
-            const confetti =
-                document.createElement("div");
+    localStorage.setItem(
+        "birthdayImages",
+        JSON.stringify(imageUrls)
+    );
 
-            confetti.className = "confetti";
+    setTimeout(()=>{
 
-            confetti.style.left =
-                Math.random() * 100 + "vw";
+        window.location.href =
+        "main.html";
 
-            confetti.style.background =
-                `hsl(${Math.random() * 360},
-        100%,60%)`;
+    },2000);
+});
 
-            document.body.appendChild(confetti);
-
-            setTimeout(() => {
-
-                confetti.remove();
-
-            }, 3000);
-        }
-
-    </script>
+</script>
 
 </body>
-
 </html>
