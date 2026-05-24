@@ -372,8 +372,11 @@ async function(){
 
         if(error){
 
+            alert(error.message);
+
             console.log(error);
-            continue;
+
+            return;
         }
 
         const { data } =
@@ -400,6 +403,3 @@ async function(){
 });
 
 </script>
-
-</body>
-</html>
